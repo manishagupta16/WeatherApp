@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+    <div class="content-container">
+        <input type="text" id="city" placeholder="Enter City Name">
+        <button type="submit" onclick="getdata()" name="button1"> Fetch Temperature </button>
+        
+        <div id="result" class="result"></div>
+
+    </div>
+
+    <script type="text/javascript">
+        
+        function getdata(){
+            var cityName = document.getElementById("city").value;
+            fetch('https://api.openweathermap.org/data/2.5/weather?q='+cityName+'&units=metric&appid=9029a4f24f77ff071269265b4cc29c49')
+           .then((response) => {
+           return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson.main.temp);
+    document.getElementById("result").innerHTML = myJson.main.temp +" °C";
+  }).catch(function(){
+    console.log("Error");
+    document.getElementById("result").innerHTML = "Please Enter the Valid City Name"
+  })
+  ;}
+    </script>
+    
+</body>
+</html>
